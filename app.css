@@ -1,0 +1,245 @@
+@font-face {
+  font-family: TTRoundsCondensed;
+  src: url("/static/ttf/TTRoundsCondensed-Regular.d7f89b77738b.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: TTRoundsCondensed;
+  src: url("/static/ttf/TTRoundsCondensed-Bold.9cbe9efbb3e8.otf");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: TTRoundsCondensed;
+  src: url("/static/ttf/TTRoundsCondensed-Light.17d045edb1cf.otf");
+  font-weight: 200;
+  font-style: normal;
+}
+/* line 10, ../scss/_fonts.scss */
+.large-header {
+  font-size: 24px;
+  font-family: Pressura, Helvetica, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: #212121;
+}
+
+/* line 19, ../scss/_fonts.scss */
+.small-header {
+  font-size: 16px;
+  font-family: Pressura, Helvetica, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  color: #212121;
+  text-transform: uppercase;
+}
+
+/* line 28, ../scss/_fonts.scss */
+.section-header {
+  font-size: 16px;
+  font-family: Roboto, Helvetica, sans-serif;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: #212121;
+}
+
+/* line 37, ../scss/_fonts.scss */
+.description {
+  line-height: 20px;
+  font-size: 14px;
+  font-family: Roboto, Helvetica, sans-serif;
+  color: #878787;
+}
+
+/* line 44, ../scss/_fonts.scss */
+.body-12 {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  font-family: Roboto, Helvetica, sans-serif;
+  color: #212121;
+}
+
+/* line 51, ../scss/_fonts.scss */
+.text-link {
+  padding-bottom: 0px;
+  border-bottom: 1px solid #FF5A00;
+  text-decoration: none;
+  cursor: pointer;
+  color: #FF5A00;
+}
+
+/* line 6, ../scss/you-are-what-you-eat.scss */
+body {
+  font-family: proxima-nova, Proxima Nova, Helvetica, sans-serif;
+  font-weight: 200;
+  color: #464646;
+}
+
+/* line 12, ../scss/you-are-what-you-eat.scss */
+.logo {
+  display: block;
+  margin: 20px auto 20px auto;
+  width: 100px;
+}
+
+/* line 19, ../scss/you-are-what-you-eat.scss */
+.top .heading {
+  margin: 0;
+  font-size: 3em;
+  text-align: center;
+  font-weight: 200;
+}
+/* line 25, ../scss/you-are-what-you-eat.scss */
+.top .subheading {
+  margin: 0 0 30px 0;
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: 200;
+}
+
+/* line 33, ../scss/you-are-what-you-eat.scss */
+.loading, .author {
+  text-align: center;
+}
+/* line 36, ../scss/you-are-what-you-eat.scss */
+.loading .loading-square, .author .loading-square {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  -webkit-animation: squareColorizer 4s infinite;
+  -moz-animation: squareColorizer 4s infinite;
+  animation: squareColorizer 4s infinite;
+}
+/* line 44, ../scss/you-are-what-you-eat.scss */
+.loading a, .author a {
+  transition: all 0.3s ease;
+  color: inherit;
+}
+/* line 48, ../scss/you-are-what-you-eat.scss */
+.loading a:hover, .author a:hover {
+  color: #a7c6df;
+}
+
+@-webkit-keyframes squareColorizer {
+  0% {
+    background-color: #efefef;
+  }
+  25% {
+    background-color: #ffe5e9;
+  }
+  50% {
+    background-color: #a7c6df;
+  }
+  75% {
+    background-color: steelblue;
+  }
+  100% {
+    background-color: #efefef;
+  }
+}
+@-moz-keyframes squareColorizer {
+  0% {
+    background-color: #efefef;
+  }
+  25% {
+    background-color: #ffe5e9;
+  }
+  50% {
+    background-color: #a7c6df;
+  }
+  75% {
+    background-color: steelblue;
+  }
+  100% {
+    background-color: #efefef;
+  }
+}
+@keyframes squareColorizer {
+  0% {
+    background-color: #efefef;
+  }
+  25% {
+    background-color: #ffe5e9;
+  }
+  50% {
+    background-color: #a7c6df;
+  }
+  75% {
+    background-color: steelblue;
+  }
+  100% {
+    background-color: #efefef;
+  }
+}
+/* line 76, ../scss/you-are-what-you-eat.scss */
+.chart {
+  display: block;
+  margin: 0 auto 60px auto;
+}
+/* line 80, ../scss/you-are-what-you-eat.scss */
+.chart rect {
+  transition: 0.2s ease all;
+  cursor: pointer;
+}
+/* line 86, ../scss/you-are-what-you-eat.scss */
+.chart .percent-bar:hover:after {
+  max-height: 50px;
+}
+/* line 90, ../scss/you-are-what-you-eat.scss */
+.chart .percent-bar:after {
+  position: absolute;
+  top: 10px;
+  max-height: 0px;
+  content: 'asdf';
+}
+/* line 98, ../scss/you-are-what-you-eat.scss */
+.chart .day {
+  color: #9c9c9c;
+  font-size: 0.675em;
+}
+
+/* line 105, ../scss/you-are-what-you-eat.scss */
+.calendar rect {
+  fill: #efefef;
+}
+
+/* line 111, ../scss/you-are-what-you-eat.scss */
+.title .name {
+  font-size: 1.5em;
+}
+
+/* line 117, ../scss/you-are-what-you-eat.scss */
+.info .match {
+  color: #9c9c9c;
+  font-size: 0.75em;
+}
+
+/* line 123, ../scss/you-are-what-you-eat.scss */
+.percent-bar-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  font-size: 0.75em;
+  color: #fff;
+  transform: translate(-50%, 10px);
+  visibility: hidden;
+}
+/* line 132, ../scss/you-are-what-you-eat.scss */
+.percent-bar-tooltip:before {
+  top: -5px;
+  left: 0;
+  box-sizing: border-box;
+  display: inline;
+  font-size: 6px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.7);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+  transform: rotate(180deg);
+}
