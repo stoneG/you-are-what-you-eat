@@ -28,7 +28,7 @@ d3.json('/you-are-what-you-eat/data.json', function(error, data) {
 
     function getPreviousMonday(daysBack) {
       // var monday = new Date();
-      var monday = 1540930989393; // 10/30/2018
+      var monday = new Date(1540930989393); // 10/30/2018
       monday.setDate(monday.getDate() - daysBack);
       if (monday.getDay() > 1) {
         monday.setDate(monday.getDate() - monday.getDay() + 1);
