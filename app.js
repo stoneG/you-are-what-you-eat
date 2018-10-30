@@ -1,9 +1,10 @@
 /*global d3*/
-d3.json('/member/api/company-orders/', function(error, data) {
-    var user = data[+window.qual];
-  
+d3.json('/you-are-what-you-eat/data.json', function(error, data) {
+    // var user = data[+window.qual];
+    var user = data[48220]
+
     d3.select('.loading').remove();
-  
+
     var squareWidth = 16,
       squareBorderWidth = 2,
       weeks = 25;
@@ -14,19 +15,20 @@ d3.json('/member/api/company-orders/', function(error, data) {
       'rgb(239, 239, 239)' // Did not order
     ];
     var tooltipText = ['Identical', 'Similar', 'Different'];
-  
+
     var squares;
     var title;
     var calendar;
     var info;
     var mungingData;
-  
+
     function getYYYYMMDD(date, delim) {
       return [date.getFullYear(), ('0' + (date.getMonth() + 1)).slice(-2), ('0' + date.getDate()).slice(-2)].join(delim);
     }
-  
+
     function getPreviousMonday(daysBack) {
-      var monday = new Date();
+      // var monday = new Date();
+      var monday = 1540930989393; // 10/30/2018
       monday.setDate(monday.getDate() - daysBack);
       if (monday.getDay() > 1) {
         monday.setDate(monday.getDate() - monday.getDay() + 1);
@@ -35,18 +37,18 @@ d3.json('/member/api/company-orders/', function(error, data) {
       }
       return monday;
     }
-  
+
     function getPercentSimilar(scores) {
       var IS = scores[0],
         SS = scores[1],
         DS = scores[2];
       return Math.round((IS + SS) / (IS + SS + DS) * 1000) / 10;
     }
-  
+
     function getPercentDissimilar(scores) {
       return 1 - getPercentSimilar(scores);
     }
-  
+
     function generateMatchText(match) {
       var text = {
         Not: [
@@ -62,7 +64,7 @@ d3.json('/member/api/company-orders/', function(error, data) {
       };
       return text[match][Math.floor(Math.random() * text[match].length)];
     }
-  
+
     function munge(you, other) {
       var munged = [];
       var today = new Date();
@@ -144,7 +146,7 @@ d3.json('/member/api/company-orders/', function(error, data) {
         ]
       };
     }
-  
+
     mungingData = Object.keys(data).map(function(x) {
       var munged = munge(user, data[x]);
       return {
@@ -161,12 +163,12 @@ d3.json('/member/api/company-orders/', function(error, data) {
         bScore = getPercentSimilar(b.scores);
       return aScore <= bScore ? (aScore == bScore ? 0 : 1) : -1;
     }); // have to do this twice for some reason!?
-  
-  
+
+
     var mungedData = [];
     var booleanArray;
     var matchableOrders;
-  
+
     for (var i = 0; i < mungingData.length; i++) {
       if (mungingData[i].name == user.name && mungingData[i].scores[0] == 1) {
         continue; // Do not show yourself
@@ -181,9 +183,9 @@ d3.json('/member/api/company-orders/', function(error, data) {
         mungedData.push(mungingData[i]);
       }
     }
-  
+
     //mungedData = mungedData.slice(1); // Do not show yourself
-  
+
     var calendarWidth = squareWidth * (weeks + 1) + squareBorderWidth * (weeks + 2),
       calendarHeight = squareWidth * 5 + squareBorderWidth * 6,
       calendarMarginY = squareWidth,
@@ -196,28 +198,28 @@ d3.json('/member/api/company-orders/', function(error, data) {
       subChartWidth = dayLegendWidth + calendarWidth,
       chartWidth = subChartWidth,
       chartHeight = subChartHeight * mungedData.length;
-  
+
     var y = d3.scale.ordinal()
       .domain(['Mon', 'Tue', 'Wed', 'Thu', 'Fri'])
       .rangeBands([0, calendarHeight]);
-  
+
     /*
     var yAxis = d3.svg.axis()
       .scale(y)
       .orient("left");
     */
-  
+
     var chart = d3.select('.chart')
       .attr('width', chartWidth)
       .attr('height', chartHeight)
       .attr('transform', 'translate(0, 0)');
-  
+
     /*
     chart.append("g")
       .attr("class", "y axis")
       .call(yAxis);
     */
-  
+
     chart.selectAll('g')
       .data(mungedData)
       .enter()
@@ -229,29 +231,29 @@ d3.json('/member/api/company-orders/', function(error, data) {
           .attr('class', function(d, i) {
             return 'calendar' + i;
           });
-  
+
     var percentBar;
     var currentData;
     var dayLegend;
-  
+
     for (i = 0; i < mungedData.length; i++) {
       currentData = mungedData[i];
       calendar = d3.select('.calendar' + i);
-  
+
       title = calendar.append('g')
         .attr('width', titleWidth)
         .attr('height', titleHeight)
         .attr('class', 'title')
         .attr('transform', 'translate(' + dayLegendWidth + ', 21)');
-  
+
       title.append('text')
         .attr('class', 'name')
         .attr('fill', '#464646')
         .text(mungedData[i].name);
-  
+
       percentBar = title.append('g')
         .attr('transform', 'translate(0, 6)');
-  
+
       percentBar.selectAll('rect')
         .data(currentData.scores)
         .enter()
@@ -293,7 +295,7 @@ d3.json('/member/api/company-orders/', function(error, data) {
               }
             }
           });
-  
+
       /*
       info.append('text')
         .attr('class', 'score')
@@ -301,32 +303,32 @@ d3.json('/member/api/company-orders/', function(error, data) {
         .attr('fill', '#464646')
         .text((getPercentSimilar(mungedData[i].scores)).toString() + '%');
       */
-  
+
       dayLegend = calendar.append('g')
         .attr('width', dayLegendWidth)
         .attr('transform', 'translate(0, ' + (titleHeight + 12) + ')');
-  
+
       dayLegend.append('text').text('M').attr('fill', '#9c9c9c').attr('class', 'day').attr('transform', 'translate(0, 0)');
       dayLegend.append('text').text('T').attr('fill', '#9c9c9c').attr('class', 'day').attr('transform', 'translate(0, ' + (squareWidth + squareBorderWidth) + ')');
       dayLegend.append('text').text('W').attr('fill', '#9c9c9c').attr('class', 'day').attr('transform', 'translate(0, ' + ((squareWidth + squareBorderWidth) * 2) + ')');
       dayLegend.append('text').text('T').attr('fill', '#9c9c9c').attr('class', 'day').attr('transform', 'translate(0, ' + ((squareWidth + squareBorderWidth) * 3) + ')');
       dayLegend.append('text').text('F').attr('fill', '#9c9c9c').attr('class', 'day').attr('transform', 'translate(0, ' + ((squareWidth + squareBorderWidth) * 4) + ')');
-  
+
       info = calendar.append('g')
         .attr('width', infoWidth)
         .attr('height', infoHeight)
         .attr('class', 'info')
         .attr('transform', 'translate(0, ' + (titleHeight + calendarHeight + 15) + ')');
-  
+
       info.append('text')
         .attr('class', 'match')
         .attr('transform', 'translate(' + dayLegendWidth + ',0)')
         .attr('fill', '#9c9c9c');
-  
+
       squares = calendar.append('g')
         .attr('transform', 'translate(' + dayLegendWidth + ',' + titleHeight + ')')
         .attr('class', 'squares');
-  
+
       squares.selectAll('rect')
         .data(mungedData[i].data)
         .enter()
@@ -364,6 +366,6 @@ d3.json('/member/api/company-orders/', function(error, data) {
             d3.select(this.parentNode.parentNode).select('.match').text('');
           });
     }
-  
+
     d3.select('.author').style('display', 'block');
   });
